@@ -1,25 +1,46 @@
+<!-- Updated home.ejs -->
 <%- include('layouts/header') -%>
+<%- include('layouts/nav') %>
 
 <main class="home-main">
-    <section class="intro">
-        <h1>Welcome to BringIt!</h1>
-        <p>Your ultimate solution for managing tasks and reminders. Stay organized and never miss out on important tasks again.</p>
-        <a href="/signUpPage" class="cta-button">Get Started</a>
-    </section>
-
-    <section class="features">=
-        <div class="feature">
-            <h2>Easy Task Management</h2>
-            <p>Organize your tasks effortlessly with our intuitive dashboard.</p>
-        </div>
-        <div class="feature">
-            <h2>Instant Reminders</h2>
-            <p>Receive reminders and notifications for your upcoming tasks.</p>
-        </div>
-        <div class="feature">
-            <h2>Accessible Anytime</h2>
-            <p>Access your tasks and reminders from anywhere, anytime.</p>
-        </div>
+    <div class="add-card">
+        <button class="add-card-btn">+ Add New Card</button>
+    </div>
+    <section class="cards">
+        <% cards.forEach(card => { %>
+            <div class="card" data-card-id="<%= card.card_id %>">
+                <div class="card-header">
+                    <input type="text" class="card-title" value="<%= card.card_name %>" readonly>
+                    <div class="card-options">
+                        <button class="delete-card">Delete</button>
+                    </div>
+                </div>
+                <div class="card-content hidden">
+                    <!-- Content for the card details -->
+                    <table class="card-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Where</th>
+                                <th>Quantity</th>
+                                <th>Suggestions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="card-items">
+                            <!-- Items will be inserted here -->
+                        </tbody>
+                    </table>
+                    <div class="add-item-form">
+                        <input type="text" id="item-name" placeholder="Item Name">
+                        <input type="text" id="item-location" placeholder="Location">
+                        <input type="number" id="item-quantity" placeholder="Quantity">
+                        <input type="text" id="item-suggestions" placeholder="Suggestions">
+                        <button id="submit-item">Add Item</button>
+                    </div>
+                </div>
+            </div>
+                      
+        <% }); %>
     </section>
 </main>
 

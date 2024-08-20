@@ -3,11 +3,14 @@
 ------------------------------------------------------------------ */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Chakra Petch, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes full height */
 }
 
 header {
@@ -20,33 +23,168 @@ header {
     Home Page Styles
 ------------------------------------------------------------------ */
 
+
 .home-main {
-    text-align: center;
-    padding: 10px;
-}
-
-.home-main h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.home-main p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-main {
     padding: 20px;
 }
 
-.signupheader {
-    text-align: center;
+.add-card {
+    margin-bottom: 20px;
+}
+
+.add-card-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Card styles */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.card-title {
+    border: none;
+    background: none;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+}
+
+.card-options {
+    display: flex;
+}
+
+.delete-card {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.card-content {
+    display: none;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.card-content.active {
+    display: block;
+}
+
+/* Table styles */
+.card-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.card-table th,
+.card-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.card-table th {
+    background-color: #f4f4f4;
+}
+
+/* Add new card form styles */
+.card-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.card-form input,
+.card-form button {
+    margin: 5px 0;
+    padding: 10px;
+}
+
+#submit-card {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#cancel-card {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .card-form {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-card-btn {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-form input,
+    .card-form button {
+        width: 100%;
+        font-size: 16px;
+    }
 }
 
 /* ------------------------------------------------------------------
     Signup Form Styles
 ------------------------------------------------------------------ */
-
+/* General form styling */
 form {
     background: #fff;
     border-radius: 5px;
@@ -69,36 +207,55 @@ input {
     border-radius: 5px;
 }
 
-/* ------------------------------------------------------------------
-    Button Styles
------------------------------------------------------------------- */
-
-.button-container {
+/* Styling for buttons */
+.auth-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.button-container button {
+.auth-buttons button {
     padding: 10px 20px;
+    margin: 0 10px;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+    background-color: #333;
     color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
-.button-container button[type="submit"] {
-    background-color: #007bff; /* Primary button color */
+.auth-buttons button.active {
+    background-color: #555;
 }
 
-.button-container button[type="reset"] {
-    background-color: #f76c6c; /* Secondary button color */
+.auth-form {
+    display: none;
 }
 
-/* Optional: Add hover effects for buttons */
-.button-container button:hover {
-    opacity: 0.9;
+.auth-form.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .auth-buttons {
+        flex-direction: column;
+    }
+
+    .auth-buttons button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    form {
+        max-width: 100%;
+        padding: 15px;
+    }
 }
 
 /* ------------------------------------------------------------------
@@ -146,17 +303,13 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 1px;
-    position: fixed;
-    bottom: 3px;
-    width: 99.5%;
+    padding: 10px;
     font-style: oblique;
-    justify-content: center;
-    text-transform: uppercase;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
     border: 1px solid crimson;
     border-radius: 12px;
+    margin-top: auto; /* Push footer to the bottom of the page */
+   width: 99.5%;%; /* Full width */
 }
 
 /* ------------------------------------------------------------------
@@ -294,7 +447,6 @@ footer {
     font-size: 1rem;
 }
 
-
 /* ------------------------------ Responsive Design ------------------------------ */
 @media (max-width: 768px) {
     .home-main {
@@ -318,7 +470,7 @@ footer {
 /* -------------------------------------- Navigation Bar -------------------------------------- */
 
 .navigation-bar {
-    background-color: burlywood;
+    background-color: #007bff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid crimson;
     border-radius: 12px;
